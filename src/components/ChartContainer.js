@@ -1,0 +1,46 @@
+import React from 'react';
+import { Box, Typography } from '@material-ui/core';
+import data from '../data/top';
+import charts from './charts';
+
+export default ({ endpoint, description, title, chart }) => {
+  const Chart = charts[chart.type];
+
+  return (
+    <div style={{ scrollSnapAlign: 'center' }}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        height="100vh"
+        maxHeight="800px"
+      >
+        <Typography variant="h6">{title}</Typography>
+        <Typography variant="subtitle1">{description}</Typography>
+        <Box display="flex" flexWrap="wrap">
+          {data.map((d) => (
+            <LegendItem key={d.id} {...d} />
+          ))}
+        </Box>
+
+        <Box flex="1" height="0">
+          <Chart {...chart.properties} data={data} />
+        </Box>
+      </Box>
+    </div>
+  );
+};
+
+function LegendItem({ id, color }) {
+  return (
+    <Box display="flex" mr={2} alignItems="center">
+      <Box
+        height="16px"
+        width="16px"
+        borderRadius="999px"
+        bgcolor={color}
+        mr={0.5}
+      />
+      <Typography>{id}</Typography>
+    </Box>
+  );
+}

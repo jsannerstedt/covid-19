@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
-import data from './data/test.json';
-import Line from './components/charts/Line';
+import { CssBaseline, Container } from '@material-ui/core';
+import config from './config.json';
+import Section from './components/Section';
 
 function App() {
   return (
-    <div className="App" style={{ height: '500px' }}>
-      <Line data={data} legendBottom="Bottom" legendLeft="left" />
-    </div>
+    <Container maxWidth="md" style={{ padding: 0 }}>
+      <CssBaseline />
+      {config.sections.map((s, i) => (
+        <Section {...s} key={i} />
+      ))}
+    </Container>
   );
 }
 

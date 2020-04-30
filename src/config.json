@@ -1,0 +1,29 @@
+{
+  "sections": [
+    {
+      "text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:05 med ny data från FOHM.\n **Här visualiseras på olika sätt om vi lyckas begränsa smittspridningen i samhället, på regionnivå.**"
+    },
+    {
+      "text": "# Dagligt antal nya smittade, per region. \n Här kan du se \"kanonkulediagram\" för alla regioner. \n\n- **Kurva på väg snett uppåt betyder exponentiell tillväxt**, ökningen av antalet nya smittade blir större för var dag. \n- **Kurva på väg åt höger betyder linjär tillväxt**, antalet nya smittade ökar ungefär lika mycket var dag. \n- **Kurva på väg neråt betyder avtagande tillväxt, antal nya smittade minskar var dag.**",
+      "charts": [
+        {
+          "title": "Topp 6 mest drabbade regioner + Skåne",
+          "description": "FOHM 29 Apr 2020 Genomsnittlig ökning per dag, regioner med flest fall. \n Linjär skala",
+          "endpoint": "http://covid19stats.ddns.net/json/topp_regioner.json",
+          "chart": {
+            "type": "line",
+            "properties": {
+              "enablePoints": false,
+              "curve": "cardinal",
+              "xScale": {
+                "type": "linear",
+                "min": 0,
+                "max": "auto"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
