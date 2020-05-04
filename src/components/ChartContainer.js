@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Box, Button, Typography } from '@material-ui/core';
-//import data from '../data/top';
+import { makeStyles } from '@material-ui/core/styles';
 import charts from './charts';
+import { Context } from '../regionStore';
 
 export default ({ endpoint, description, title, chart }) => {
   const [disabled, setDisabled] = useState([]);
   const [data, setData] = useState();
+  const [selected] = useContext(Context);
   const Chart = charts[chart.type];
 
   const toggleId = (id) => {
@@ -20,9 +22,7 @@ export default ({ endpoint, description, title, chart }) => {
     if (!endpoint) {
       return;
     }
-    fetch(endpoint, {
-      mode: 'no-cors', // no-cors, *cors, same-origin
-    })
+    fetch(endpoint)
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch((err) => {
@@ -35,41 +35,56 @@ export default ({ endpoint, description, title, chart }) => {
   }
 
   return (
-    <div style={{ scrollSnapAlign: 'center' }}>
+    <Box mb={3} mt={3}>
+      <Typography variant="h6">{title}</Typography>
+      <Typography variant="subtitle1">{description}</Typography>
       <Box
         display="flex"
         flexDirection="column"
         height="100vh"
         maxHeight="800px"
       >
-        <Typography variant="h6">{title}</Typography>
-        <Typography variant="subtitle1">{description}</Typography>
         <Box display="flex" flexWrap="wrap">
-          {data.map((d) => (
-            <LegendItem
-              key={d.id}
-              {...d}
-              onSelect={toggleId}
-              selected={disabled.includes(d.id)}
-            />
-          ))}
+          {data
+            .filter((d) => selected.includes(d.id))
+            .map((d) => (
+              <LegendItem
+                key={d.id}
+                {...d}
+                onSelect={toggleId}
+                selected={disabled.includes(d.id)}
+              />
+            ))}
         </Box>
 
         <Box flex="1" height="0">
           <Chart
             {...chart.properties}
-            data={data.filter((d) => !disabled.includes(d.id))}
+            data={data.filter(
+              (d) => selected.includes(d.id) && !disabled.includes(d.id)
+            )}
           />
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginRight: theme.spacing(1),
+    textTransform: 'none',
+  },
+}));
+
 function LegendItem({ id, color, onSelect, selected }) {
+  const classes = useStyles();
   return (
-    <Button onClick={() => onSelect(id)}>
-      <Box display="flex" mr={2} alignItems="center">
+    <Button
+      onClick={() => onSelect(id)}
+      className={classes.button}
+      size="small"
+      startIcon={
         <Box
           height="16px"
           width="16px"
@@ -77,10 +92,9 @@ function LegendItem({ id, color, onSelect, selected }) {
           bgcolor={color}
           mr={0.5}
         />
-        <Typography color={selected ? 'textSecondary' : 'textPrimary'}>
-          {id}
-        </Typography>
-      </Box>
+      }
+    >
+      {id}
     </Button>
   );
 }

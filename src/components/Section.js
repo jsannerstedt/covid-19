@@ -1,11 +1,11 @@
 import React from 'react';
 import Markdown from 'markdown-to-jsx';
-import { Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Chart from './ChartContainer';
 
 export default ({ charts, text }) => {
   return (
-    <>
+    <Box mt={3} mb={5}>
       <Markdown
         options={{
           overrides: {
@@ -22,6 +22,6 @@ export default ({ charts, text }) => {
         {text}
       </Markdown>
       {charts && charts.map((c, i) => <Chart {...c} key={i} />)}
-    </>
+    </Box>
   );
 };

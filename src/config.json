@@ -24,6 +24,53 @@
           }
         }
       ]
+    },
+    {
+      "text": "# Dubbleringstid och daglig procentuell ökning av antalet smittade\n Här kan du se hur många dagar det tar innan antalet smittade fördubblas. Du kan även se vilken procentuell ökning det motsvarar per dag.  Den horisontella axeln visar datum.\n",
+      "charts": [
+        {
+          "title": "Dubbleringstid",
+          "description": "Ju högre, desto bättre",
+          "endpoint": "http://covid19stats.ddns.net/json/doubling.json",
+          "chart": {
+            "type": "line",
+            "properties": {
+              "enablePoints": false,
+              "curve": "cardinal",
+              "xScale": {
+                "type": "time",
+                "format": "%Y-%m-%d",
+                "precision": "day"
+              },
+              "axisBottom": {
+                "format": "%b %d",
+                "tickValues": "every 7 days"
+              }
+            }
+          }
+        },
+        {
+          "title": "Procentuell ökningstakt",
+          "description": "Ju lägre, desto bättre",
+          "endpoint": "http://covid19stats.ddns.net/json/percentage.json",
+          "chart": {
+            "type": "line",
+            "properties": {
+              "enablePoints": false,
+              "curve": "cardinal",
+              "xScale": {
+                "type": "time",
+                "format": "%Y-%m-%d",
+                "precision": "day"
+              },
+              "axisBottom": {
+                "format": "%b %d",
+                "tickValues": "every 7 days"
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }
