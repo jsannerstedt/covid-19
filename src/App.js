@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CssBaseline, Container } from '@material-ui/core';
-import config from './config.json';
+//import config from './config.json';
 import Section from './components/Section';
 import AppBar from './components/AppBar';
 import Store from './regionStore';
 
-
 function App() {
+  const [config, setConfig] = useState();
+  useEffect(() => {
+    fetch('/config.json')
+      .then((res) => res.json())
+      .then((c) => setConfig(c))
+      .catch(() => {
+        console.log('could not fetch config');
+      });
+  }, []);
+
+  if (!config) {
+    return '... loading';
+  }
+
   return (
     <Store>
       <CssBaseline />

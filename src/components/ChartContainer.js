@@ -52,7 +52,7 @@ export default ({ endpoint, description, title, chart }) => {
                 key={d.id}
                 {...d}
                 onSelect={toggleId}
-                selected={disabled.includes(d.id)}
+                disabled={disabled.includes(d.id)}
               />
             ))}
         </Box>
@@ -77,12 +77,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LegendItem({ id, color, onSelect, selected }) {
+function LegendItem({ id, color, onSelect, disabled }) {
   const classes = useStyles();
   return (
     <Button
       onClick={() => onSelect(id)}
       className={classes.button}
+      color={disabled ? 'default' : 'primary'}
       size="small"
       startIcon={
         <Box
