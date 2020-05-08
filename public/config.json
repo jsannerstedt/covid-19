@@ -1,42 +1,77 @@
 {
   "sections": [
     {
-      "text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:05 med ny data från FOHM.\n **Här visualiseras på olika sätt om vi lyckas begränsa smittspridningen i samhället, på regionnivå.**"
+		"text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:10 med ny data från FoHM.\n"		     	
     },
+	{	"text": "## Status\nProcentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
+	},
+	{	"text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>"
+	},
+	{	"text": "Daglig utveckling av procentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
+	},
+
+	{	"text": "<img src=\"http://covid19stats.ddns.net/trend_table.png\" width=\"700\"/>"
+	},
+    
     {
-      "text": "# Dagligt antal nya smittade, per region. \n Här kan du se \"kanonkulediagram\" för alla regioner. \n\n- **Kurva på väg snett uppåt betyder exponentiell tillväxt**, ökningen av antalet nya smittade blir större för var dag. \n- **Kurva på väg åt höger betyder linjär tillväxt**, antalet nya smittade ökar ungefär lika mycket var dag. \n- **Kurva på väg neråt betyder avtagande tillväxt, antal nya smittade minskar var dag.**",
+      "text": "# Dagligt antal nya smittade \n\n- **Kurva på väg snett uppåt betyder exponentiell tillväxt**, ökningen av antalet nya smittade blir större för var dag. \n- **Kurva på väg åt höger betyder linjär tillväxt**, antalet nya smittade ökar ungefär lika mycket var dag. \n- **Kurva på väg neråt betyder avtagande tillväxt, antal nya smittade minskar var dag.**",
       "charts": [
-        {
-          "title": "Topp 6 mest drabbade regioner + Skåne",
-          "description": "FOHM 29 Apr 2020 Genomsnittlig ökning per dag, regioner med flest fall. \n Linjär skala",
-          "endpoint": "http://covid19stats.ddns.net/json/topp_regioner.json",
+        { 
+		  "title": "Genomsnittlig ökning per dag",
+          "description": "Linjär skala",
+          "endpoint": "http://covid19stats.ddns.net/json/status.json",
           "chart": {
             "type": "line",
             "properties": {
-              "enablePoints": false,
+              "enablePoints": true,			  
+			  "enableSlices": "x",
               "curve": "cardinal",
+			  "lineWidth": 4, 
+			  "pointSize":10,
+			  "enableGridX":true,
+			  "enableGridY":true,
               "xScale": {
                 "type": "linear",
                 "min": 0,
                 "max": "auto"
-              }
+              },
+			  "axisBottom": {
+				"legend":"Totalt antal smittade",
+				"legendOffset": 30
+			  },
+			  "axisLeft": {
+				"legend":"Antal nya smittade",
+				"legendOffset": -40
+			  },
+			  "margin": {
+				"top":50,
+				"left":50,
+				"bottom":50,
+				"top":50
+			  }
             }
           }
-        },
-        {
+        }]
+	},
+	{ 
+	   "text": "",
+	   "charts": [
+	    {
           "description": "Logaritmisk skala",
-          "endpoint": "http://covid19stats.ddns.net/json/topp_regioner_inc.json",
+          "endpoint": "http://covid19stats.ddns.net/json/status.json",
           "chart": {
             "type": "line",
             "properties": {
-              "enablePoints": false,
-              "curve": "cardinal",
+              "enablePoints": true,
+              "curve": "linear",
+			  "lineWidth": 4,
+			  "pointSize":10,
               "useMesh": true,
               "axisBottom": {
-                "tickValues": [1, 10, 100, 1000, 10000]
+                "tickValues": [0,1, 10, 100, 1000, 10000]
               },
               "axisLeft": {
-                "tickValues": [0, 10, 100, 1000, 10000]
+                "tickValues": [0,1, 10, 100,1000, 10000]
               },
               "xScale": {
                 "type": "log",
@@ -48,23 +83,55 @@
                 "base": 10,
                 "max": "auto"
               }
+			  ,
+			  "axisBottom": {
+				"legend":"Totalt antal smittade",
+				"legendOffset": 30
+			  },
+			  "axisLeft": {
+				"legend":"Antal nya smittade",
+				"legendOffset": -40
+			  },
+			  "margin": {
+				"top":50,
+				"left":50,
+				"bottom":50,
+				"top":50
+			  }
             }
           }
         },
         {
           "title": "Genomsnittlig ökning per dag per 100 000 invånare",
           "description": "Linjär skala",
-          "endpoint": "http://covid19stats.ddns.net/json/status.json",
+          "endpoint": "http://covid19stats.ddns.net/json/status_incidense.json",
           "chart": {
             "type": "line",
             "properties": {
-              "enablePoints": false,
+              "enablePoints": true,
               "curve": "cardinal",
+			  "lineWidth": 4,
+			  "pointSize":10,
               "xScale": {
                 "type": "linear",
                 "min": 0,
                 "max": "auto"
-              }
+              },
+			  "axisBottom": {
+				"legend":"Totalt antal smittade per 100000 invånare",
+				"legendOffset": 30
+			  },
+			  "axisLeft": {
+				"legend":"Antal nya smittade per 100000 invånare",
+				"legendOffset": -40
+			  },
+			  "margin": {
+				"top":50,
+				"left":50,
+				"bottom":50,
+				"top":50
+			  }
+			  
             }
           }
         },
@@ -74,14 +141,16 @@
           "chart": {
             "type": "line",
             "properties": {
-              "enablePoints": false,
+              "enablePoints": true,
               "curve": "cardinal",
+			  "lineWidth": 4,
+			  "pointSize":10,
               "useMesh": true,
               "axisBottom": {
-                "tickValues": [1, 10, 100, 1000, 10000]
+                "tickValues": [1, 10, 100, 500, 1000, 2000, 5000, 10000]
               },
               "axisLeft": {
-                "tickValues": [0, 10, 100, 1000, 10000]
+                "tickValues": [1, 10, 100, 200, 300, 400, 5001000, 10000]
               },
               "xScale": {
                 "type": "log",
@@ -92,45 +161,40 @@
                 "type": "log",
                 "base": 10,
                 "max": "auto"
-              }
+              },
+			  "axisBottom": {
+				"legend":"Totalt antal smittade per 100000 invånare",
+				"legendOffset": 30
+			  },
+			  "axisLeft": {
+				"legend":"Antal nya smittade per 100000 invånare",
+				"legendOffset": -40
+			  },
+			  "margin": {
+				"top":50,
+				"left":50,
+				"bottom":50,
+				"top":50
+			  }
+			  
             }
           }
         }
       ]
     },
     {
-      "text": "# Dubbleringstid och daglig procentuell ökning av antalet smittade\n Här kan du se hur många dagar det tar innan antalet smittade fördubblas. Du kan även se vilken procentuell ökning det motsvarar per dag.  Den horisontella axeln visar datum.\n",
+      "text": "# Daglig procentuell ökning av det totala antalet smittade.\n",
       "charts": [
-        {
-          "title": "Dubbleringstid",
-          "description": "Ju högre, desto bättre",
-          "endpoint": "http://covid19stats.ddns.net/json/doubling.json",
-          "chart": {
-            "type": "line",
-            "properties": {
-              "enablePoints": false,
-              "curve": "cardinal",
-              "xScale": {
-                "type": "time",
-                "format": "%Y-%m-%d",
-                "precision": "day"
-              },
-              "axisBottom": {
-                "format": "%b %d",
-                "tickValues": "every 7 days"
-              }
-            }
-          }
-        },
-        {
-          "title": "Procentuell ökningstakt",
+        {          
           "description": "Ju lägre, desto bättre",
           "endpoint": "http://covid19stats.ddns.net/json/percentage.json",
           "chart": {
             "type": "line",
             "properties": {
-              "enablePoints": false,
+              "enablePoints": true,
               "curve": "cardinal",
+			  "lineWidth": 4,
+			  "pointSize":10,
               "xScale": {
                 "type": "time",
                 "format": "%Y-%m-%d",
