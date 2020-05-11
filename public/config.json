@@ -67,28 +67,25 @@
 			  "lineWidth": 4,
 			  "pointSize":10,
               "useMesh": true,
-              "axisBottom": {
-                "tickValues": [0,1, 10, 100, 1000, 10000]
-              },
-              "axisLeft": {
-                "tickValues": [0,1, 10, 100,1000, 10000]
-              },
               "xScale": {
                 "type": "log",
-                "base": 10,
-                "max": "auto"
+                "base": 10,                
+				"max": "auto"
               },
               "yScale": {
                 "type": "log",
                 "base": 10,
+                "min": 1,				
                 "max": "auto"
               }
 			  ,
 			  "axisBottom": {
+                "tickValues": [1, 10, 100, 1000, 10000],
 				"legend":"Totalt antal smittade",
 				"legendOffset": 30
 			  },
 			  "axisLeft": {
+			    "tickValues": [1, 10, 100,1000, 10000],
 				"legend":"Antal nya smittade",
 				"legendOffset": -40
 			  },
@@ -146,27 +143,25 @@
 			  "lineWidth": 4,
 			  "pointSize":10,
               "useMesh": true,
-              "axisBottom": {
-                "tickValues": [1, 10, 100, 500, 1000, 2000, 5000, 10000]
-              },
-              "axisLeft": {
-                "tickValues": [1, 10, 100, 200, 300, 400, 5001000, 10000]
-              },
               "xScale": {
                 "type": "log",
                 "base": 10,
+				"min": 1,
                 "max": "auto"
               },
               "yScale": {
                 "type": "log",
                 "base": 10,
+				"min": 0.1,				                
                 "max": "auto"
               },
 			  "axisBottom": {
+			    "tickValues": [1, 10, 100, 1000, 10000],
 				"legend":"Totalt antal smittade per 100000 invånare",
 				"legendOffset": 30
 			  },
 			  "axisLeft": {
+			    "tickValues": [0.1, 1, 10, 100, 1000, 10000],
 				"legend":"Antal nya smittade per 100000 invånare",
 				"legendOffset": -40
 			  },
