@@ -1,13 +1,38 @@
 import React from 'react';
 import { Bar } from '@nivo/bar';
 
-const CustomBarComponent = ({ data, ...properties }) => {
+const CustomBarComponent = ({
+  color,
+  data,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  x,
+  y,
+}) => {
   const width = 15;
   const height = 15;
-  const props = { ...properties, width, height };
+  const props = {
+    color,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    width,
+    height,
+    x,
+    y,
+  };
+
+  if (data.id == 4 || data.id == 5) {
+    return <Triangle {...props} />;
+  }
 
   if (data.id == 3) {
     return <Rect {...props} />;
+  }
+
+  if (data.id == 2 || data.id == 1) {
+    return <Triangle {...props} dir="down" />;
   }
   return <Circle {...props} />;
 };
@@ -28,6 +53,26 @@ function Rect({ color, ...props }) {
   return <rect {...props} fill={color} />;
 }
 
+function Triangle({ color, height, width, x, y, dir = 'up', ...props }) {
+  const points =
+    dir === 'up'
+      ? `0,${height} ${width},${height} ${width / 2},0`
+      : `0,0 ${width},0 ${width / 2},${height}`;
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
+        <polygon
+          points={points}
+          strokeWidth={2}
+          stroke={color}
+          fill={color}
+          {...props}
+        />
+      </svg>
+    </g>
+  );
+}
+
 const commonProps = {
   width: 900,
   height: 500,
@@ -42,7 +87,7 @@ const commonProps = {
   minValue: 0,
   maxValue: 400,
   enableGridX: true,
-  enableGridY: false,
+  enableGridY: true,
   label: (d) => Math.abs(d.value),
   labelTextColor: 'inherit:darker(1.2)',
   axisBottom: {
