@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import charts from './charts';
 import { Context } from '../regionStore';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 export default ({ endpoint, description, title, chart }) => {
   const [disabled, setDisabled] = useState([]);
@@ -58,12 +59,16 @@ export default ({ endpoint, description, title, chart }) => {
         </Box>
 
         <Box flex="1" height="0">
-          <Chart
-            {...chart.properties}
-            data={data.filter(
-              (d) => selected.includes(d.id) && !disabled.includes(d.id)
+          <AutoSizer>
+            {({ height, width }) => (
+              <Chart
+                {...{ height, width, ...chart.properties }}
+                data={data.filter(
+                  (d) => selected.includes(d.id) && !disabled.includes(d.id)
+                )}
+              />
             )}
-          />
+          </AutoSizer>
         </Box>
       </Box>
     </Box>

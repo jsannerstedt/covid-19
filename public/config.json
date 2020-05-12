@@ -7,7 +7,17 @@
       "text": "## Status\nProcentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
     },
     {
-      "text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>"
+      "text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>",
+      "charts": [
+        {
+          "title": "Procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna.",
+          "endpoint": "http://covid19stats.ddns.net/json/trend_history.json",
+          "chart": {
+            "type": "status",
+            "properties": {}
+          }
+        }
+      ]
     },
     {
       "text": "Daglig utveckling av procentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
@@ -41,7 +51,8 @@
               },
               "axisBottom": {
                 "legend": "Totalt antal smittade",
-                "legendOffset": 30
+                "legendOffset": 30,
+                "tickValues": 5
               },
               "axisLeft": {
                 "legend": "Antal nya smittade",
@@ -200,7 +211,7 @@
               },
               "axisBottom": {
                 "format": "%b %d",
-                "tickValues": "every 7 days"
+                "tickValues": 5
               }
             }
           }
