@@ -76,7 +76,7 @@ function Triangle({ color, height, width, x, y, dir = 'up', ...props }) {
 const commonProps = {
   width: 900,
   height: 500,
-  margin: { top: 60, right: 80, bottom: 60, left: 80 },
+  margin: { top: 60, right: 80, bottom: 60, left: 10 },
 
   padding: 0.2,
 
@@ -101,25 +101,39 @@ const commonProps = {
   },
 };
 
-export default ({ data, ...properties }) => (
-  <Bar
-    data={data
-      .map((d) => ({
-        region: d.id,
-        value: d.data.pop().y,
-      }))
-      .sort(compare)
-      .map(getVal)}
-    {...commonProps}
-    {...properties}
-    barComponent={CustomBarComponent}
-    keys={['5', '4', '3', '2', '1']}
-    groupMode="grouped"
-    padding={0.1}
-    colors={['#8b0000', '#f00', '#ff8c00', '#7cfc00', '#008000']}
-    innerPadding={1}
-  />
-);
+export default ({ data, ...properties }) => {
+  const mapped = data
+    .map((d) => ({
+      region: d.id,
+      value: d.data.pop().y,
+    }))
+    .sort(compare);
+  const marker = mapped.find((m) => m.region === 'Sverige');
+  return (
+    <Bar
+      data={mapped.filter((m) => m.region !== 'Sverige').map(getVal)}
+      {...commonProps}
+      {...properties}
+      barComponent={CustomBarComponent}
+      keys={['5', '4', '3', '2', '1']}
+      groupMode="grouped"
+      padding={0.1}
+      colors={['#8b0000', '#f00', '#ff8c00', '#7cfc00', '#008000']}
+      innerPadding={1}
+      layers={['grid', 'axes', 'markers', 'bars', 'legends', 'annotations']}
+      markers={
+        marker && [
+          {
+            axis: 'y',
+            value: marker.value + 200,
+            lineStyle: { stroke: 'blue', strokeDasharray: 10, strokeWidth: 4 },
+            legend: `Sverige ${marker.value}%`,
+          },
+        ]
+      }
+    />
+  );
+};
 
 function getVal({ region, value }) {
   const prop = getProp(value);
