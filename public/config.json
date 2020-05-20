@@ -10,6 +10,13 @@
       "text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>",
       "charts": [
         {
+          "title": "Tabell",
+          "endpoint": "http://covid19stats.ddns.net/json/summary_table.json",
+          "chart": {
+            "type": "table"
+          }
+        },
+        {
           "title": "Procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna.",
           "endpoint": "http://covid19stats.ddns.net/json/trend_history.json",
           "chart": {
