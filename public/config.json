@@ -1,10 +1,10 @@
 {
   "sections": [
     {
-      "text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:10 med ny data från FoHM.\n<br>Alla datapunkter är ett medelvärde av de 7 senaste dagarna.<br>Den senaste dagens data är inte inkluderad eftersom den bara innefattar inrapporteringar till kl 11.30."
+      "text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:10 med ny data från FoHM.\n"
     },
     {
-      "text": "## Sammanfattningsbild\nProcentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
+      "text": "## Status\nProcentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
     },
     {
       "text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>"
@@ -12,9 +12,26 @@
     {
       "text": "## Daglig förändring senaste veckan\n<br>Daglig utveckling av procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
     },
+
     {
       "text": "<img src=\"http://covid19stats.ddns.net/trend_table.png\" width=\"700\"/>"
+    },    
+    {
+
+      "charts": [
+        {
+          "title": "Tabell",
+          "endpoint": "http://covid19stats.ddns.net/json/summary_table.json",
+          "chart": {
+            "type": "table"
+          }
+        }
+
+      ]
     },
+
+
+
     {
       "text": "# Dagligt antal nya smittade \n\n- **Kurva på väg snett uppåt betyder exponentiell tillväxt**, ökningen av antalet nya smittade blir större för var dag. \n- **Kurva på väg åt höger betyder linjär tillväxt**, antalet nya smittade ökar ungefär lika mycket var dag. \n- **Kurva på väg neråt betyder avtagande tillväxt, antal nya smittade minskar var dag.**",
       "charts": [
@@ -80,7 +97,7 @@
               "yScale": {
                 "type": "log",
                 "base": 10,
-                "min": 0.1,
+                "min": 1,
                 "max": "auto"
               },
               "axisBottom": {
@@ -180,10 +197,10 @@
       ]
     },
     {
-      "text": "# Daglig procentuell ökning av det totala antalet smittade.\n- Ju **lägre värde** desto långsammare spridningstakt.<br>\n- Ett kurva som **minskar varje dag** är bra eftersom det betyder oförändrad eller avtagande spridning.\n- En kurva som **ökar eller inte minskar** är dålig, eftersom det innebär ökande spridning.",
+      "text": "# Daglig procentuell ökning av det totala antalet smittade.\n",
       "charts": [
         {
-          "description": "",
+          "description": "Ju lägre, desto bättre",
           "endpoint": "http://covid19stats.ddns.net/json/percentage.json",
           "chart": {
             "type": "line",
@@ -200,11 +217,6 @@
               "axisBottom": {
                 "format": "%b %d",
                 "tickValues": 5
-              },
-              "axisLeft": {
-                "tickValues": 1,
-                "legend": "Procentuell ökning av det totala antalet smittade.",
-                "legendOffset": -40
               }
             }
           }
