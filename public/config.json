@@ -1,22 +1,22 @@
 {
 	"sections": [{
-			"text": "# Covid-19-statistik på regionnivå. Uppdateras dagligen 14:10 med ny data från FoHM.\n"
+			"text": "# Covid19-statistik på regionnivå. Uppdateras dagligen ca kl 14:00.\n"
 		},
 		{
-			"text": "## Status\nProcentuell förändringen av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
+			"text": "## Status idag\nProcentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna.\n<br>Genom att titta på förändringen i antalet nya smittade från en vecka sedan så får vi en snabb känsla för vilket håll varje region är på väg åt."
 		},
 		{
 			"text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>"
 		},
 		{
-			"text": "## Daglig förändring senaste veckan\n<br>Daglig utveckling av procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna."
+			"text": "## Daglig förändring senaste veckan\n<br>Samma data som i diagrammet ovan, fast med de värden som gällt varje dag den senaste veckan. Bra för att få en känsla över hur stabil utvecklingen är."
 		},
 
 		{
 			"text": "<img src=\"http://covid19stats.ddns.net/trend_table.png\" width=\"700\"/>"
 		},
 		{
-
+			"text":"Olika regioner har kommit olika långt i smittspridningen. Här kan du undersöka det, och mer.",
 			"charts": [{
 					"title": "Tabell",
 					"endpoint": "http://covid19stats.ddns.net/json/summary_table.json",
@@ -188,29 +188,7 @@
 			]
 		},
 		{
-			"text": "# Daglig procentuell ökning av det totala antalet smittade.\n",
-			"charts": [{
-				"description": "Ju lägre, desto bättre",
-				"endpoint": "http://covid19stats.ddns.net/json/percentage.json",
-				"chart": {
-					"type": "line",
-					"properties": {
-						"enablePoints": true,
-						"curve": "cardinal",
-						"lineWidth": 4,
-						"pointSize": 10,
-						"xScale": {
-							"type": "time",
-							"format": "%Y-%m-%d",
-							"precision": "day"
-						},
-						"axisBottom": {
-							"format": "%b %d",
-							"tickValues": 5
-						}
-					}
-				}
-			}]
-		}
+			"text": "All data kommer från Folkhälsomyndigheten.<br>Sidan görs av Aras Papadelis och Joel Sannerstedt.",
+		}		
 	]
 }
