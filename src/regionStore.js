@@ -5,13 +5,29 @@ const stored = localStorage.getItem('regions');
 let selected = stored
   ? JSON.parse(stored)
   : [
-      'Stockholm',
-      'Västra Götaland',
-      'Östergötland',
-      'Sörmland',
-      'Uppsala',
-      'Skåne',
-      'Sverige',
+  'Sverige',  
+  'Stockholm',
+  'Västra Götaland',
+  'Östergötland',
+  'Sörmland',
+  'Örebro',
+  'Uppsala',
+  'Skåne',
+  'Jönköping',
+  'Dalarna',
+  'Västmanland',
+  'Blekinge',
+  'Gotland',
+  'Gävleborg',
+  'Halland',
+  'Jämtland Härjedalen',
+  'Kalmar',
+  'Kronoberg',
+  'Norrbotten',
+  'Värmland',
+  'Västerbotten',
+  'Västernorrland'
+  
     ];
 
 export const Context = createContext();
