@@ -12,7 +12,7 @@ function App() {
       .then((res) => res.json())
       .then((c) => setConfig(c))
       .catch(() => {
-        console.log('test');
+        console.log('Error parsing config.json');
       });
   }, []);
 

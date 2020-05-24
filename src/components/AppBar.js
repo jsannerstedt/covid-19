@@ -32,7 +32,7 @@ export default function HideAppBar(props) {
         <AppBar>
           <Toolbar>
             <Box flexGrow={1}>
-              <Typography variant="h6">Covid19-statistik på regionnivå. Uppdateras dagligen ca kl 14. </Typography>
+              <Typography variant="h6">Covid19-statistik</Typography>
             </Box>
             <IconButton
               aria-label="FilterList"
