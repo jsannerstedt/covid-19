@@ -7,7 +7,7 @@ import { Context } from '../regionStore';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { useInView } from 'react-intersection-observer';
 
-export default ({ endpoint, description, title, chart }) => {
+export default ({ endpoint, description, title, showFilter, chart }) => {
   const [disabled, setDisabled] = useState([]);
   const [data, setData] = useState([]);
   const [selected] = useContext(Context);
@@ -53,28 +53,35 @@ export default ({ endpoint, description, title, chart }) => {
               maxHeight="800px"
             >
               <>
-                <Box display="flex" flexWrap="wrap">
-                  {data
-                    .filter((d) => selected.includes(d.id))
-                    .map((d) => (
-                      <LegendItem
-                        key={d.id}
-                        {...d}
-                        onSelect={toggleId}
-                        disabled={disabled.includes(d.id)}
-                      />
-                    ))}
-                </Box>
+                {showFilter && (
+                  <Box display="flex" flexWrap="wrap">
+                    {data
+                      .filter((d) => selected.includes(d.id))
+                      .map((d) => (
+                        <LegendItem
+                          key={d.id}
+                          {...d}
+                          onSelect={toggleId}
+                          disabled={disabled.includes(d.id)}
+                        />
+                      ))}
+                  </Box>
+                )}
 
                 <Box flex="1" height="0">
                   <AutoSizer>
                     {({ height, width }) => (
                       <Chart
                         {...{ height, width, ...chart.properties }}
-                        data={data.filter(
-                          (d) =>
-                            selected.includes(d.id) && !disabled.includes(d.id)
-                        )}
+                        data={
+                          showFilter
+                            ? data.filter(
+                                (d) =>
+                                  selected.includes(d.id) &&
+                                  !disabled.includes(d.id)
+                              )
+                            : data
+                        }
                       />
                     )}
                   </AutoSizer>

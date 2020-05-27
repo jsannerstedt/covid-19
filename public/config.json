@@ -41,6 +41,7 @@
           "title": "Genomsnittlig ökning per dag",
           "description": "Linjär skala",
           "endpoint": "http://covid19stats.ddns.net/json/status.json",
+          "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -81,6 +82,7 @@
         {
           "description": "Logaritmisk skala",
           "endpoint": "http://covid19stats.ddns.net/json/status.json",
+          "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -123,6 +125,7 @@
           "title": "Genomsnittlig ökning per dag per 100 000 invånare",
           "description": "Linjär skala",
           "endpoint": "http://covid19stats.ddns.net/json/status_incidense.json",
+          "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -154,6 +157,7 @@
         {
           "description": "Logaritmisk skala",
           "endpoint": "http://covid19stats.ddns.net/json/status_incidense.json",
+          "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -200,6 +204,7 @@
         {
           "description": "Ju lägre, desto bättre",
           "endpoint": "http://covid19stats.ddns.net/json/percentage.json",
+          "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
