@@ -8,11 +8,11 @@ import Store from './regionStore';
 function App() {
   const [config, setConfig] = useState();
   useEffect(() => {
-    fetch('/config.json')
+    fetch('config.json')
       .then((res) => res.json())
       .then((c) => setConfig(c))
       .catch(() => {
-        console.log('could not fetch config');
+        console.log('Error parsing config.json');
       });
   }, []);
 
