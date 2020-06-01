@@ -19,7 +19,7 @@ const CustomBarComponent = ({
     onMouseLeave,
     width,
     height,
-    x,
+    x: x + width / 2,
     y,
   };
 
@@ -50,26 +50,23 @@ function Circle({ x, y, width, height, color, ...props }) {
 }
 
 function Rect({ color, ...props }) {
-  return <rect {...props} fill={color} />;
+  return <rect {...props} y={props.y - props.height / 2} fill={color} />;
 }
 
-function Triangle({ color, height, width, x, y, dir = 'up', ...props }) {
+function Triangle({ color, height, width, x, y: origY, dir = 'up', ...props }) {
+  const y = origY + height / 2;
   const points =
     dir === 'up'
-      ? `0,${height} ${width},${height} ${width / 2},0`
-      : `0,0 ${width},0 ${width / 2},${height}`;
+      ? `${x},${y} ${x + width},${y} ${x + width / 2},${y - height}`
+      : `${x},${y - height} ${x + width},${y - height} ${x + width / 2},${y}`;
   return (
-    <g transform={`translate(${x},${y})`}>
-      <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
-        <polygon
-          points={points}
-          strokeWidth={2}
-          stroke={color}
-          fill={color}
-          {...props}
-        />
-      </svg>
-    </g>
+    <polygon
+      {...props}
+      points={points}
+      strokeWidth={1}
+      stroke={color}
+      fill={color}
+    />
   );
 }
 
@@ -116,8 +113,6 @@ export default ({ data, ...properties }) => {
       {...properties}
       barComponent={CustomBarComponent}
       keys={['5', '4', '3', '2', '1']}
-      groupMode="grouped"
-      padding={0.1}
       colors={['#8b0000', '#f00', '#ff8c00', '#7cfc00', '#008000']}
       innerPadding={1}
       layers={['grid', 'axes', 'markers', 'bars', 'legends', 'annotations']}
