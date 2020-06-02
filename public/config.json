@@ -10,7 +10,17 @@
       "text": "<img src=\"http://covid19stats.ddns.net/trend.png\" width=\"700\"/>"
     },
     {
-      "text": "## Daglig förändring senaste veckan\n<br>####Samma typ av data som i diagrammet ovan, fast med historik för den senaste veckan. Med denna tabell får vi en känsla över hur stabil utvecklingen är. En rad som är helgrön betyder en bestående nedgång. Är raden orange betyder det att regionen står och väger, med varierande värden från dag till dag. Är raden röd så ökar smittspridningen."
+      "text": "## Daglig förändring senaste veckan\n<br>####Samma typ av data som i diagrammet ovan, fast med historik för den senaste veckan. Med denna tabell får vi en känsla över hur stabil utvecklingen är. En rad som är helgrön betyder en bestående nedgång. Är raden orange betyder det att regionen står och väger, med varierande värden från dag till dag. Är raden röd så ökar smittspridningen.",
+      "charts": [
+        {
+          "title": "Procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna.",
+          "endpoint": "http://covid19stats.ddns.net/json/trend_history.json",
+          "chart": {
+            "type": "heatMap",
+            "properties": {}
+          }
+        }
+      ]
     },
     {
       "text": "<img src=\"http://covid19stats.ddns.net/trend_table.png\" width=\"700\"/>",
