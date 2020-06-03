@@ -10,14 +10,16 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import { Toolbar, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 50,
+const useStyles = makeStyles((theme) => ({
+  sizeSmall: {
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(0.5),
+      paddingRight: theme.spacing(0.5),
+    },
   },
-});
+}));
 
 export default function DenseTable({ data = [] }) {
-  const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('region');
   const [meta = {}, ...values] = data;
@@ -37,11 +39,7 @@ export default function DenseTable({ data = [] }) {
         </Typography>
       </Toolbar>
       <TableContainer>
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="a dense table"
-        >
+        <Table size="small" aria-label="a dense table">
           <EnhancedTableHead
             columns={columns}
             order={order}
@@ -59,6 +57,7 @@ export default function DenseTable({ data = [] }) {
 }
 
 function EnhancedTableHead(props) {
+  const classes = useStyles();
   const { columns, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -69,6 +68,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         {columns.map((headCell) => (
           <TableCell
+            classes={classes}
             key={headCell.id}
             align={headCell.type === 'number' ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
@@ -89,21 +89,28 @@ function EnhancedTableHead(props) {
 }
 
 function Body({ columns, rows }) {
+  const classes = useStyles();
   return (
     <TableBody>
       {rows.map((row) => (
         <TableRow key={row.region}>
           {columns.map((c, i) =>
             i === 0 ? (
-              <TableCell component="th" scope="row" key={c.id}>
+              <TableCell
+                component="th"
+                scope="row"
+                key={c.id}
+                classes={classes}
+              >
                 {row[c.id]}
               </TableCell>
             ) : (
               <TableCell
+                classes={classes}
                 align={c.type === 'number' ? 'right' : 'left'}
                 key={c.id}
               >
-                {row[c.id]}
+                {format(c, row)}
               </TableCell>
             )
           )}
@@ -111,6 +118,13 @@ function Body({ columns, rows }) {
       ))}
     </TableBody>
   );
+}
+
+function format(cell, row) {
+  if (cell.type === 'date') {
+    return row[cell.id].substring(2);
+  }
+  return row[cell.id];
 }
 
 function map(data) {
