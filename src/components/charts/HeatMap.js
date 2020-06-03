@@ -1,5 +1,62 @@
 import React from 'react';
 import { HeatMap } from '@nivo/heatmap';
+import { getColor } from '../../utils/status';
+/*
+const HeatMapCellRect = ({
+  data,
+  value,
+  x,
+  y,
+  width,
+  height,
+  color,
+  opacity,
+  borderWidth,
+  borderColor,
+  enableLabel,
+  textColor,
+  onHover,
+  onLeave,
+  onClick,
+  theme,
+}) => (
+  <g
+    transform={`translate(${x}, ${y})`}
+    onMouseEnter={onHover}
+    onMouseMove={onHover}
+    onMouseLeave={onLeave}
+    onClick={(e) => {
+      onClick(data, e);
+    }}
+    style={{ cursor: 'pointer' }}
+  >
+    <rect
+      x={width * -0.5}
+      y={height * -0.5}
+      width={width}
+      height={height}
+      fill={getColor(value)}
+      fillOpacity={opacity}
+      strokeWidth={borderWidth}
+      stroke={borderColor}
+      strokeOpacity={opacity}
+    />
+    {enableLabel && (
+      <text
+        dominantBaseline="central"
+        textAnchor="middle"
+        style={{
+          ...theme.labels.text,
+          fill: textColor,
+        }}
+        fillOpacity={opacity}
+      >
+        {value}
+      </text>
+    )}
+  </g>
+);
+*/
 
 export default ({ data, ...properties }) => {
   const map = data.map(({ id, data }) => ({
@@ -9,7 +66,6 @@ export default ({ data, ...properties }) => {
       {}
     ),
   }));
-  console.log(map);
 
   const keys = data.length > 0 ? data[0].data.map((d) => d.x) : [];
 
@@ -17,9 +73,9 @@ export default ({ data, ...properties }) => {
     <HeatMap
       data={map}
       keys={keys}
+      colors="oranges"
       indexBy="id"
       margin={{ top: 100, right: 20, bottom: 60, left: 100 }}
-      colors="reds"
       axisTop={{
         orient: 'top',
         tickSize: 5,
@@ -47,8 +103,3 @@ export default ({ data, ...properties }) => {
     />
   );
 };
-
-function getColor() {
-  const colors = ['#8b0000', '#f00', '#ff8c00', '#7cfc00', '#008000'];
-  return '#fff';
-}

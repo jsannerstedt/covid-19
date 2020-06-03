@@ -1,5 +1,7 @@
 import React from 'react';
 import { Bar } from '@nivo/bar';
+import { colors, getProp } from '../../utils/status';
+import regions from '../../regions';
 
 const CustomBarComponent = ({
   color,
@@ -73,7 +75,7 @@ function Triangle({ color, height, width, x, y: origY, dir = 'up', ...props }) {
 const commonProps = {
   width: 900,
   height: 500,
-  margin: { top: 60, right: 80, bottom: 60, left: 10 },
+  margin: { top: 60, right: 10, bottom: 60, left: 10 },
 
   padding: 0.2,
 
@@ -113,7 +115,7 @@ export default ({ data, ...properties }) => {
       {...properties}
       barComponent={CustomBarComponent}
       keys={['5', '4', '3', '2', '1']}
-      colors={['#8b0000', '#f00', '#ff8c00', '#7cfc00', '#008000']}
+      colors={colors}
       innerPadding={1}
       layers={['grid', 'axes', 'markers', 'bars', 'legends', 'annotations']}
       markers={
@@ -136,23 +138,6 @@ function getVal({ region, value }) {
     region,
     [prop]: value + 200,
   };
-}
-
-function getProp(val) {
-  if (val > 50) {
-    return '5';
-  }
-  if (val > 10) {
-    return '4';
-  }
-
-  if (val < -50) {
-    return '1';
-  }
-  if (val < -10) {
-    return '2';
-  }
-  return '3';
 }
 
 function compare(a, b) {
