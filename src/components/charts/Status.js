@@ -21,7 +21,7 @@ const CustomBarComponent = ({
     onMouseLeave,
     width,
     height,
-    x: x + width / 2,
+    x: x, //   + width / 2 // for desktop,
     y,
   };
 
@@ -75,7 +75,7 @@ function Triangle({ color, height, width, x, y: origY, dir = 'up', ...props }) {
 const commonProps = {
   width: 900,
   height: 500,
-  margin: { top: 60, right: 10, bottom: 60, left: 10 },
+  margin: { top: 10, right: 50, bottom: 100, left: 10 },
 
   padding: 0.2,
 
@@ -92,7 +92,7 @@ const commonProps = {
   axisBottom: {
     tickSize: 0,
     tickPadding: 12,
-    tickRotation: 90,
+    tickRotation: -90,
   },
   axisLeft: null,
   axisRight: {
@@ -100,7 +100,7 @@ const commonProps = {
   },
 };
 
-export default ({ data, ...properties }) => {
+export default ({ data, width, height, ...properties }) => {
   const mapped = data
     .map((d) => ({
       region: d.id,
@@ -109,26 +109,34 @@ export default ({ data, ...properties }) => {
     .sort(compare);
   const marker = mapped.find((m) => m.region === 'Sverige');
   return (
-    <Bar
-      data={mapped.filter((m) => m.region !== 'Sverige').map(getVal)}
-      {...commonProps}
-      {...properties}
-      barComponent={CustomBarComponent}
-      keys={['5', '4', '3', '2', '1']}
-      colors={colors}
-      innerPadding={1}
-      layers={['grid', 'axes', 'markers', 'bars', 'legends', 'annotations']}
-      markers={
-        marker && [
-          {
-            axis: 'y',
-            value: marker.value + 200,
-            lineStyle: { stroke: 'blue', strokeDasharray: 10, strokeWidth: 4 },
-            legend: `Sverige ${marker.value}%`,
-          },
-        ]
-      }
-    />
+    <div style={{ transform: 'rotate(90deg)', width: `${width}px` }}>
+      <Bar
+        data={mapped.filter((m) => m.region !== 'Sverige').map(getVal)}
+        {...commonProps}
+        {...properties}
+        width={height}
+        height={width}
+        barComponent={CustomBarComponent}
+        keys={['5', '4', '3', '2', '1']}
+        colors={colors}
+        innerPadding={1}
+        layers={['grid', 'axes', 'markers', 'bars', 'legends', 'annotations']}
+        markers={
+          marker && [
+            {
+              axis: 'y',
+              value: marker.value + 200,
+              lineStyle: {
+                stroke: 'blue',
+                strokeDasharray: 10,
+                strokeWidth: 4,
+              },
+              legend: `Sverige ${marker.value}%`,
+            },
+          ]
+        }
+      />
+    </div>
   );
 };
 
