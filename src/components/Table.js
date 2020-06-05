@@ -121,9 +121,9 @@ function Body({ columns, rows }) {
 }
 
 function format(cell, row) {
-  if (cell.type === 'date') {
-    return row[cell.id].substring(2);
-  }
+  // if (cell.type === 'date') {
+  //   return row[cell.id].substring(2);
+  // }
   return row[cell.id];
 }
 
