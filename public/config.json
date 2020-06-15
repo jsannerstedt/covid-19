@@ -1,8 +1,11 @@
 {
   "sections": [
     {
-      "text": "#### Uppdateras dagligen ca kl 14.00. Alla siffror är 7-dagars rullande medelvärden. Dagens datum är inte inkluderat, eftersom dagens siffror bara är preliminära.\n"
+      "text": "#### Uppdateras dagligen ca kl 14.00. Alla siffror är 7-dagars rullande medelvärden. Dagens datum är inte inkluderat, eftersom dagens siffror bara är preliminära.\n#####All data kommer från Folkhälsomyndigheten.<br>Sidan är gjord av Aras Papadelis och Joel Sannerstedt."
     },
+	{
+	  "text": "Den gamla sidan finns <a href=\"http://covid19stats.ddns.net/old\">här.</a>"
+	},
     {
       "text": "## Snabb överblicksbild\n<br>####Genom att titta på förändringen i antalet nya smittade från en vecka sedan så får vi en god överblick över hur olika regioner utvecklas just nu.",
       "charts": [
@@ -17,7 +20,7 @@
       ]
     },
     {
-      "text": "## Daglig förändring senaste veckan\n<br>####Samma typ av data som i diagrammet ovan, fast med historik för den senaste veckan. Med denna tabell får vi en känsla över hur stabil utvecklingen är. En rad som är helgrön betyder en bestående nedgång. Är raden orange betyder det att regionen står och väger, med varierande värden från dag till dag. Är raden röd så ökar smittspridningen.",
+      "text": "## Daglig förändring senaste veckan\n<br>####Samma typ av data som i diagrammet ovan, fast med historik för den senaste veckan. Med denna tabell får vi en känsla över hur stabil utvecklingen är. En rad som är helvit betyder en bestående nedgång. Är raden röd så ökar smittspridningen kraftigt.",
       "charts": [
         {
           "title": "Procentuell förändring av antalet smittade de senaste 7 dagarna jämfört med de föregående 7 dagarna.",
@@ -28,31 +31,7 @@
           }
         }
       ]
-    },
-    {
-      "text": "## Jämförande tabeller över smittspridning i landet\n<br> ####Tryck på rubrikerna för att ändra sortering.",
-      "charts": [
-        {
-          "title": "",
-          "endpoint": "http://covid19stats.ddns.net/json/summary_table1.json",
-          "chart": {
-            "type": "table"
-          }
-        }
-      ]
-    },
-    {
-      "text": "",
-      "charts": [
-        {
-          "title": "",
-          "endpoint": "http://covid19stats.ddns.net/json/summary_table2.json",
-          "chart": {
-            "type": "table"
-          }
-        }
-      ]
-    },
+    },    
     {
       "text": "# Dagligt antal nya smittade per 100000 invånare, rullande 7-dagars medelvärde\n\n- **Kurva på väg snett uppåt betyder exponentiell tillväxt**, ökningen av antalet nya smittade blir större för var dag. \n- **Kurva på väg åt höger betyder linjär tillväxt**, antalet nya smittade ökar ungefär lika mycket var dag. \n- **Kurva på väg neråt betyder avtagande tillväxt, antal nya smittade minskar var dag.**\n<br><br>Du kan välja vilka regioner du vill kunna jämföra med menyn längst uppe till höger på sidan, sen kan trycka på en regions namn ovanför diagrammen för att visa eller gömma dess linje.",
       "charts": [
@@ -60,6 +39,7 @@
           "title": "",
           "description": "Regioner med flest antal smittade, plus Skåne",
           "endpoint": "http://covid19stats.ddns.net/json/topp_regioner_inc.json",
+		  "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -92,6 +72,7 @@
           "title": "",
           "description": "Övriga regioner",
           "endpoint": "http://covid19stats.ddns.net/json/andra_regioner_inc.json",
+		  "showFilter": true,
           "chart": {
             "type": "line",
             "properties": {
@@ -118,6 +99,65 @@
                 "bottom": 50
               }
             }
+          }
+        },
+        {
+          "title": "",
+          "description": "Antal döda per dag, 7-dagars rullande medelvärde, 10 dagars fördröjning för att få pålitliga värden.",
+          "endpoint": "http://covid19stats.ddns.net/json/deathplot.json",	  
+          "chart": {
+            "type": "line",
+            "properties": {
+              "enablePoints": true,
+              "curve": "linear",
+              "lineWidth": 2,
+              "pointSize": 10,              
+			  "xScale": {
+                "type": "time",
+                "format": "%Y-%m-%d",
+                "precision": "day"
+              },
+			  "axisTop":null,
+			  "axisRight":null,       
+              "axisBottom": {			    
+                "format": "%b %d",
+                "tickValues": "every 5 days",
+				"tickRotation": -90
+              },              
+              "axisLeft": {
+                "legend": "Avlidna/dag i hela riket, 7 dagars rullande medelvärde",
+                "legendOffset": -40
+              },
+              "margin": {
+                "top": 50,
+                "left": 50,
+                "bottom": 50
+              }
+            }
+          }
+        }
+      ]
+    },
+	{
+      "text": "## Jämförande tabeller över smittspridning i landet\n<br> ####Tryck på rubrikerna för att ändra sortering.",
+      "charts": [
+        {
+          "title": "",
+          "endpoint": "http://covid19stats.ddns.net/json/summary_table1.json",
+          "chart": {
+            "type": "table"
+          }
+        }
+      ]
+    },
+    {
+      "text": "",
+      "charts": [
+        {
+          "title": "",
+          "endpoint": "http://covid19stats.ddns.net/json/summary_table2.json",
+          "chart": {
+            "type": "table"
           }
         }
       ]
